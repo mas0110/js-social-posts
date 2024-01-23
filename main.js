@@ -1,3 +1,4 @@
+// Milestone 1 - Creiamo il nostro array di oggetti che rappresentano ciascun post.
 const posts = [
     {
         "id": 1,
@@ -38,7 +39,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
             "name": "Luca Formicola",
-            "image": null
+            "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 56,
         "created": "2021-04-03"
@@ -56,6 +57,8 @@ const posts = [
     }
 ];
 
+
+// Milestone 2 - Prendendo come riferimento il layout di esempio presente nell'html, stampiamo i post del nostro feed.
 let postslistHTML = document.getElementById("container")
 
 for(let i = 0; i < posts.length; i++){
@@ -80,10 +83,10 @@ voluptaterecusandae architecto. Et nihil ullam aut alias.</div>
     <div class="post__footer">
         <div class="likes js-likes">
             <div class="likes__cta">
-                <a class="like-button  js-like-button" href="#" data-postid="1">
+                <button class="like-button js-like-button" href="#" data-postid="1">
                     <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                     <span class="like-button__label">Mi Piace</span>
-                </a>
+                </button>
             </div>
             <div class="likes__counter">
                 Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes} </b> persone
@@ -92,3 +95,28 @@ voluptaterecusandae architecto. Et nihil ullam aut alias.</div>
     </div>            
 </div>`
 }
+
+// Milestone 3 - Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
+// Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+let likedPosts = [];
+
+const likeButton = document.querySelector(".js-like-button");
+const likeCounter = document.querySelector(".js-likes-counter");
+
+likeButton.addEventListener("click", function likePost() {
+    
+    
+    if (!likedPosts.includes(likePost)) {
+       
+        likeButton.classList.add("red");
+        likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
+        likedPosts.push(likePost);
+    } else{
+        
+        likeButton.classList.remove("red");
+        likeCounter.textContent = parseInt(likeCounter.textContent) - 1;
+        likedPosts = likedPosts.filter(id => id !== likePost);
+    }
+
+    console.log('Liked Posts:', likedPosts);
+})
