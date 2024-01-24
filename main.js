@@ -61,7 +61,18 @@ const posts = [
 // Milestone 2 - Prendendo come riferimento il layout di esempio presente nell'html, stampiamo i post del nostro feed.
 let postslistHTML = document.getElementById("container")
 
+//Bonus: Formattare le date in formato italiano (gg/mm/aaaa)
+function DataItaliana(data) {
+    const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
+    return new Date(data).toLocaleDateString('it-IT', options);
+}
+
+
 for(let i = 0; i < posts.length; i++){
+
+    const data = `${posts[i].created}`;
+    const dataFormattata = DataItaliana(data);
+    
     postslistHTML.innerHTML +=`
     <div class="post">
     <div class="post__header">
@@ -71,7 +82,7 @@ for(let i = 0; i < posts.length; i++){
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${posts[i].author.name} </div>
-                <div class="post-meta__time">${posts[i].created}</div>
+                <div class="post-meta__time">${dataFormattata}</div>
             </div>                    
         </div>
     </div>
